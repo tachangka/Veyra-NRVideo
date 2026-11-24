@@ -259,8 +259,9 @@ bool FsrSrBackend::evaluate(ID3D12GraphicsCommandList* list, ID3D12Resource* col
     dispatch.motionVectorScale = {1.0f, 1.0f};
     dispatch.renderSize = {renderWidth, renderHeight};
     dispatch.upscaleSize = {upscaleWidth, upscaleHeight};
-    dispatch.enableSharpening = false;
-    dispatch.sharpness = 0.0f;
+    // Use FSR's built-in RCAS sharpening; avoid an extra sharpening pass.
+    dispatch.enableSharpening = true;
+    dispatch.sharpness = 0.2f;
     dispatch.frameTimeDelta = frameTimeMs > 0.0f ? frameTimeMs : 16.6f;
     dispatch.preExposure = 1.0f;
     dispatch.reset = reset;
